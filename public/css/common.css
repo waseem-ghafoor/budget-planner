@@ -1,0 +1,15 @@
+.logo {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  text-decoration: none !important;
+  color: black;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #56AB5F !important;
+    border-color: #56AB5F !important;
+}
+
+a {
+    color: #56AB5F !important;
+}
