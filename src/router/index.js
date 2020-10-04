@@ -7,6 +7,7 @@ import Contact from '@/components/Contact.vue'
 import About from '@/components/About.vue'
 import Register from '@/components/Register.vue'
 import Dashboard from '@/components/Dashboard.vue'
+import Plan from '@/components/Plan.vue'
 import Summary from '@/components/Summary.vue'
 import Setting from '@/components/Setting.vue'
 import ForgotPassword from '@/components/ForgotPassword.vue'
@@ -34,6 +35,7 @@ let router = new VueRouter({
 
     { path: "/summary",     name: "summary",     component: Summary,     meta: { requiresAuth: true, title: 'Summary' } },
     { path: "/dashboard",   name: "dashboard",   component: Dashboard,   meta: { requiresAuth: true, title: 'Dashboard' } },
+    { path: "/plan",        name: "plan",        component: Plan,        meta: { requiresAuth: true, title: 'Plan' } },    
     { path: "/setting",     name: "setting",     component: Setting,     meta: { requiresAuth: true, title: 'Setting' } },
     { path: "/feedback",    name: "feedback",    component: Feedback,    meta: { requiresAuth: true, title: 'Feedback' } },
     { path: "/need-help",   name: "need-help",   component: NeedHelp,    meta: { title: 'Need Help?' } },

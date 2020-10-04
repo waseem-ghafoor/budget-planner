@@ -148,7 +148,7 @@ export default {
     saveProfile: function() {
       this.$http.put('users/' + localStorage.getItem('user') + '/user_profile', { user_profile: this.user_profile })
         .then(response => {
-          location.reload();
+          if(this.completeSetup){location.reload();}
         })
         .catch(error => {
           // TODO: Refactor this with a feature.
