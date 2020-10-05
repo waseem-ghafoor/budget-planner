@@ -226,7 +226,7 @@ export default {
       paidFor: false,
       plan_ids: {
           plus_plan_id: 'P-2M797703ST7377149L53AW3Y',
-          prime_plan_id: 'P-3UJ44512KF880012JL53VRXA'
+          prime_plan_id: 'P-2GD672872A9541239L55O4DI'
       },
       subscription: {
           subscription_id: null,
