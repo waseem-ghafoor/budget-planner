@@ -27,7 +27,7 @@
                 <div class="mb-3"></div>
                 <h4 class="price display-4 font-weight-light">
                   <span class="price-currency">$</span
-                  ><span class="price-number">0</span>
+                  ><span class="price-number">0.00</span>
                 </h4>
                 <div v-if="is_free_plan_subscribed">
                   <button
@@ -81,12 +81,12 @@
               </div>
               <div class="pricing-item-header text-center">
                 <h3 class="mb-0 pricing-plan-name text-primary font-weight-bold">
-                  Plus
+                  {{this.plan_lists.plus_plan['name']}}
                 </h3>
                 <div class="mb-3"></div>
                 <h4 class="price display-4 font-weight-light">
                   <span class="price-currency">$</span>
-                  <span class="price-number">5.99/M</span>
+                  <span class="price-number">{{this.plan_lists.plus_plan['price']}}/M</span>
                 </h4>
                 <div v-if="is_plus_plan_subscribed">
                   <button
@@ -144,12 +144,14 @@
                 <h3
                   class="mb-0 pricing-plan-name text-primary font-weight-bold"
                 >
-                  Prime
+                  {{this.plan_lists.prime_plan['name']}}
                 </h3>
                 <div class="mb-3"></div>
                 <h4 class="price display-4 font-weight-light">
                   <span class="price-currency">$</span
-                  ><span class="price-number">9.99/M</span>
+                  ><span class="price-number">
+                    {{this.plan_lists.prime_plan['price']}}/M
+                    </span>
                 </h4>
                 <div v-if="is_prime_plan_subscribed">
                   <button
@@ -224,6 +226,10 @@ export default {
       selected_plan: null,
       loaded: false,
       paidFor: false,
+      plan_lists: {
+          plus_plan: [],
+          prime_plan: []
+        },
       plan_ids: {
           plus_plan_id: 'P-2M797703ST7377149L53AW3Y',
           prime_plan_id: 'P-2GD672872A9541239L55O4DI'
@@ -247,8 +253,21 @@ export default {
   },
   mounted: function() {
     this.get_subscription();
+    this.get_plan_list();
   },
   methods: {
+    get_plan_list: function(){
+      this.$http.get('/plans')
+      .then(response => {
+        console.log(response.data);
+        console.log("plan lists");
+          [this.plan_lists.plus_plan, this.plan_lists.prime_plan] = response.data
+        })
+      .catch(error => {
+        // TODO: Refactor this with a feature.
+        console.log(error);
+      });
+    },
     get_subscription: function(){
       this.$http.get('users/subscription')
       .then(response => {
