@@ -307,8 +307,9 @@ export default {
               label: 'subscribe'
           },
           createSubscription: (data, actions) => {
-          return actions.subscription.create({
-          'plan_id':  this.plan_ids.prime_plan_id});
+            return actions.subscription.create({
+              'plan_id':  this.get_selected_plan_id()
+            });
           },
           onApprove: (data, actions) => {
               console.log("======check=======");
@@ -336,7 +337,7 @@ export default {
         }
       );
     },
-    get_selected_plan_id: () => {
+    get_selected_plan_id: function() {
         if (this.selected_plan == 'plus_plan'){
           return this.plan_lists.plus_plan['paypal_plan_id'];
         }
