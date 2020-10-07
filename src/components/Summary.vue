@@ -10,6 +10,8 @@
           <Goal />
           <br>
           <Asset :selectedYear="selectedYear" />
+          <br>
+          <Plan />
         </div>
       </div>
     </div>
@@ -21,6 +23,7 @@ import Profile from './Profile.vue'
 import Loan from './Loan.vue'
 import Goal from './Goal.vue'
 import Asset from './Asset.vue'
+import Plan from './Plan.vue'
 
 export default {
   name: 'Summary',
@@ -31,7 +34,8 @@ export default {
     Profile,
     Goal,
     Loan,
-    Asset
+    Asset,
+    Plan
   }
 }
 </script>

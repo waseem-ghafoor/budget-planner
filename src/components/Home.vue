@@ -129,7 +129,7 @@
                             <h3 class="mb-0 pricing-plan-name text-primary font-weight-bold">Plus</h3>
                             <div class="mb-3"></div>
                             <h4 class="price display-4 font-weight-light"><span class="price-currency">$</span><span class="price-number">5.99/M</span></h4>
-                            <div><a class="btn btn-primary theme-btn-primary" href="#">Coming Soon</a></div>
+                            <div><a v-on:click="checkAuth" class="btn btn-primary theme-btn-primary" href="https://www.sandbox.paypal.com/webapps/billing/plans/subscribe?plan_id=P-2M797703ST7377149L53AW3Y">Subscribe</a></div>
                         </div><!--//pricing-item-header-->
                         <hr>
                         <div class="pricing-item-body">
@@ -156,7 +156,7 @@
                             <h3 class="mb-0 pricing-plan-name text-primary font-weight-bold">Prime</h3>
                             <div class="mb-3"></div>
                             <h4 class="price display-4 font-weight-light"><span class="price-currency">$</span><span class="price-number">9.99/M</span></h4>
-                            <div><a class="btn btn-primary theme-btn-primary" href="#">Coming Soon</a></div>
+                            <div><a class="btn btn-primary theme-btn-primary" href="#">Subscribe</a></div>
                         </div><!--//pricing-item-header-->
                         <hr>
                         <div class="pricing-item-body">
@@ -263,6 +263,12 @@ export default {
     }
   },
   methods: {
+    checkAuth: function (event) {
+      if (localStorage.getItem('jwt') == null) {
+        this.$router.push('login');
+        event.preventDefault();
+      }
+    },
     saveNewPersonalAdvisory: function() {
       this.$http.post('/personal_advisor_requests', {
           personal_advisor_request: this.newPersonalAdvisory

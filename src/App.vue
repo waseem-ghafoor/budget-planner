@@ -88,8 +88,9 @@
       </div><!--//branding-->
     </header>
 
-    <b-modal id="ask-for-user-profile" :no-close-on-esc="true" :no-close-on-backdrop="true" :hide-header-close="true" :hide-footer="true" :hide-header="true">
+    <b-modal id="ask-for-user-profile" :no-close-on-esc="false" :no-close-on-backdrop="true" :hide-header-close="true" :hide-footer="true" :hide-header="true">
       <Profile />
+      <Plan />
     </b-modal>
 
     <div style="margin-bottom: 1000" v-if="this.$route.path !== '/'">
@@ -103,7 +104,8 @@
 </template>
 
 <script>
-import Profile from './components/Profile.vue'
+import Profile from './components/Profile.vue';
+import Plan from './components/Plan.vue';
 
 export default {
   name: 'app',
@@ -119,7 +121,8 @@ export default {
     }
   },
   components: {
-    Profile
+    Profile,
+    Plan
   },
   methods: {
     changeBGColor: function(color) {
@@ -285,6 +288,7 @@ export default {
   },
   data: function() {
     return {
+      fill_user_from: false,
       userProfile: {expense_ratio: {}},
       selectedFinancialYear: null,
       allFinancialYear: [],
