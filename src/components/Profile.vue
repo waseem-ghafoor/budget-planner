@@ -139,7 +139,8 @@ export default {
     loadUserProfile: function() {
       this.$http.get('users/' + localStorage.getItem('user') + '/user_profile')
         .then(response => {
-          if(response.data != null) { this.user_profile = response.data; }
+          if(response.data != null) { this.user_profile = response.data;
+          }
         })
         .catch(error => {
           this.$parent.$parent.toast(error);
