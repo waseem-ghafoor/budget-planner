@@ -185,7 +185,7 @@ export default {
       if(this.loggedIn) {
         this.$http.get('users/' + localStorage.getItem('user') + '/user_profile')
           .then(response => {
-            if(response.data.first_name != null) {
+            if(response.data.first_name == null) {
               // window.location.href = "/";
               this.$bvModal.show("ask-for-user-profile");
             } else {
