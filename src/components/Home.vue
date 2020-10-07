@@ -103,7 +103,7 @@
                             <h3 class="mb-0 pricing-plan-name text-primary font-weight-bold">FREE</h3>
                             <div class="mb-3"></div>
                             <h4 class="price display-4 font-weight-light"><span class="price-currency">$</span><span class="price-number">0</span></h4>
-                            <div><a class="btn btn-primary theme-btn-primary" href="http://budgetroot.com/#/register">Try BudgetRoot for Free</a></div>
+                            <div><a class="btn btn-primary theme-btn-primary" href="https://budgetroot.com/#/register">Try BudgetRoot for Free</a></div>
                         </div><!--//pricing-item-header-->
                         <hr>
                         <div class="pricing-item-body">
@@ -126,9 +126,9 @@
                             POPULAR
                         </div>
                         <div class="pricing-item-header text-center">
-                            <h3 class="mb-0 pricing-plan-name text-primary font-weight-bold">Plus</h3>
+                            <h3 class="mb-0 pricing-plan-name text-primary font-weight-bold">{{this.plan_lists.plus_plan['name']}}</h3>
                             <div class="mb-3"></div>
-                            <h4 class="price display-4 font-weight-light"><span class="price-currency">$</span><span class="price-number">5.99/M</span></h4>
+                            <h4 class="price display-4 font-weight-light"><span class="price-currency">$</span><span class="price-number">{{this.plan_lists.plus_plan['price']}}/M</span></h4>
                             <div><a v-on:click="checkAuth" class="btn btn-primary theme-btn-primary" href="https://www.sandbox.paypal.com/webapps/billing/plans/subscribe?plan_id=P-2M797703ST7377149L53AW3Y">Subscribe</a></div>
                         </div><!--//pricing-item-header-->
                         <hr>
@@ -153,9 +153,9 @@
                 <div class="pricing-item col-12 col-lg-4 mb-lg-5">
                     <div class="pricing-item-inner shadow-lg p-4 rounded h-100">
                         <div class="pricing-item-header text-center">
-                            <h3 class="mb-0 pricing-plan-name text-primary font-weight-bold">Prime</h3>
+                            <h3 class="mb-0 pricing-plan-name text-primary font-weight-bold">{{this.plan_lists.prime_plan['name']}}</h3>
                             <div class="mb-3"></div>
-                            <h4 class="price display-4 font-weight-light"><span class="price-currency">$</span><span class="price-number">9.99/M</span></h4>
+                            <h4 class="price display-4 font-weight-light"><span class="price-currency">$</span><span class="price-number">{{this.plan_lists.prime_plan['price']}}/M</span></h4>
                             <div><a class="btn btn-primary theme-btn-primary" href="#">Subscribe</a></div>
                         </div><!--//pricing-item-header-->
                         <hr>
@@ -253,6 +253,10 @@ export default {
   name: 'Home',
   data: function() {
     return {
+      plan_lists: {
+          plus_plan: [],
+          prime_plan: []
+        },
       newPersonalAdvisory: {
         first_name: null,
         last_name: null,
@@ -262,7 +266,21 @@ export default {
       submit_request_message: false
     }
   },
+  mounted: function() {
+    this.get_plan_list();
+  },
   methods: {
+    get_plan_list: function(){
+      this.$http.get('/plans')
+      .then(response => {
+        console.log(response.data);
+        console.log("plan lists");
+          [this.plan_lists.plus_plan, this.plan_lists.prime_plan] = response.data
+        })
+      .catch(error => {
+        // TODO: Refactor this with a feature.
+        console.log(error);
+      })},
     checkAuth: function (event) {
       if (localStorage.getItem('jwt') == null) {
         this.$router.push('login');

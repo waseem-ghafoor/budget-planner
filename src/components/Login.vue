@@ -25,7 +25,7 @@
                           </div><!--//form-group-->
                           <div class="form-group password">
                               <label class="sr-only" for="signup-password">Password</label>
-                              <input v-model="password" id="signup-password" name="signup-password" type="password" class="form-control signup-password" placeholder="Create a password" required="required">
+                              <input v-model="password" id="signup-password" name="signup-password" type="password" class="form-control signup-password" placeholder="Your password" required="required">
                           </div><!--//form-group-->
                           <div class="text-center">
                               <button type="submit" class="btn btn-primary theme-btn mx-auto">Login</button>
