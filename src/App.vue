@@ -91,6 +91,7 @@
     <b-modal id="ask-for-user-profile" :no-close-on-esc="false" :no-close-on-backdrop="true" :hide-header-close="true" :hide-footer="true" :hide-header="true">
       <Profile />
       <Plan />
+      <button id="prime_plan" v-on:click="close_model" class="btn btn-primary theme-btn-primary float-right"> Close</button>
     </b-modal>
 
     <div style="margin-bottom: 1000" v-if="this.$route.path !== '/'">
@@ -118,13 +119,16 @@ export default {
     },
     backgroundImage: function() {
       return "background-image: url('img/background-" + this.selectedBGColor + ".svg'), url('img/background-white.svg');"
-    }
+    },
   },
   components: {
     Profile,
     Plan
   },
   methods: {
+    close_model: function(){
+      this.$bvModal.hide("ask-for-user-profile");
+    },
     changeBGColor: function(color) {
       localStorage.setItem('BGColor', color);
       this.selectedBGColor = color;
@@ -181,7 +185,7 @@ export default {
       if(this.loggedIn) {
         this.$http.get('users/' + localStorage.getItem('user') + '/user_profile')
           .then(response => {
-            if(response.data.first_name == null) {
+            if(response.data.first_name != null) {
               // window.location.href = "/";
               this.$bvModal.show("ask-for-user-profile");
             } else {
