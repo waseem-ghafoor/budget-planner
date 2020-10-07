@@ -230,10 +230,6 @@ export default {
           plus_plan: [],
           prime_plan: []
         },
-      plan_ids: {
-          plus_plan_id: 'P-2M797703ST7377149L53AW3Y',
-          prime_plan_id: 'P-2GD672872A9541239L55O4DI'
-      },
       subscription: {
           subscription_id: null,
           plan_name: null
@@ -281,15 +277,24 @@ export default {
       });
     },
     plan_subscribe: function(e){
-
       this.selected_plan = e.target.id;
-
+      if (this.selected_plan !== 'free_plan' && (this.subscription.subscription_id === undefined || this.subscription.subscription_id === null)){
+        this.display_paypal_button();
+      }
+      else{
+        //this.subscription.subscription_id = '123-subsc';
+        this.subscription.plan_name = this.selected_plan;
+        this.update_subscription();
+      }
+      console.log(this.subscription.subscription_id);
+      e.preventDefault();
+    },
+    display_paypal_button: function(){
       const script = document.createElement("script");
       script.src =
           "https://www.paypal.com/sdk/js?client-id=AUSiJLQmGll3v4N9PtZJZ_JXnyvo15n9qOzBmMEdsKBR_y7dKMY9wFSq8CdqVVpdaWTfHMHKqJztM-CJ&vault=true";
       script.addEventListener("load", this.setLoaded);
       document.body.appendChild(script);
-      e.preventDefault();
     },
     setLoaded: function() {
         this.loaded = true;
@@ -333,10 +338,10 @@ export default {
     },
     get_selected_plan_id: () => {
         if (this.selected_plan == 'plus_plan'){
-          return this.plan_ids.plus_plan_id
+          return this.plan_lists.plus_plan['paypal_plan_id'];
         }
         else if(this.selected_plan == 'prime_plan'){
-          return this.plan_ids.prime_plan_id
+          return this.plan_lists.prime_plan['paypal_plan_id'];
         }
       }
   }
