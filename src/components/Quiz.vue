@@ -97,7 +97,7 @@
 			                    <li class="list-inline-item"><a href="https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbudgetroot.com%2F%23%2FQuiz"><i class="fab fa-facebook-f fa-fw"></i></a></li>
             <li class="list-inline-item"><a href="https://twitter.com/intent/tweet/?text=BudgetRoot.com%20quiz&amp;url=http%3A%2F%2Fbudgetroot.com%2F%23%2FQuiz"><i class="fab fa-twitter fa-fw"></i></a></li>
 			  	 <li class="list-inline-item"><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fbudgetroot.com%2F%23%2FQuiz&amp;title=BudgetRoot.com%20quiz&amp;summary=BudgetRoot.com%20quiz&amp;source=http%3A%2F%2Fbudgetroot.com%2F%23%2FQuiz"><i class="fab fa-linkedin fa-fw"></i></a></li>
-				 <li class="list-inline-item"><a href="mailto:?Subject=Simple Share Buttons&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 http://budgetroot.com/#/Quiz"><i class="fab fa-mail fa-fw"></i></a></li>
+				 <li class="list-inline-item"><a href="mailto:?Subject=Simple Share Buttons&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 https://budgetroot.com/#/Quiz"><i class="fab fa-mail fa-fw"></i></a></li>
 
             </ul><!--//social-list-->
             </div>

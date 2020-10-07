@@ -7,7 +7,7 @@
         <div class="container position-relative">
 
           <nav class="navbar navbar-expand-lg" >
-                    <a href="http://www.budgetroot.com/" <img src="http://www.budgetroot.com/assets/images/logo.svg" width="450" height="65">
+                    <a href="https://www.budgetroot.com/" <img src="https://www.budgetroot.com/assets/images/logo.svg" width="450" height="65">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
