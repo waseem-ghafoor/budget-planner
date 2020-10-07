@@ -3,7 +3,7 @@
         
         <div class="row m-0" style="background-color: #EFF2F5;">
           <div class="auth-col-main bg-white col-12 col-lg-8 order-2 text-center p-5 h-100 align-self-stretch">
-            <p> <img src="http://www.budgetroot.com/assets/images/logo.svg" width="350" height="50"> </p>
+            <p> <img src="https://www.budgetroot.com/assets/images/logo.svg" width="350" height="50"> </p>
             <div class="auth-wrapper mx-auto">            
               <div class="social-auth text-center mx-auto">                        
                       <ul class="social-buttons list-unstyled">               
