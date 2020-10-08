@@ -250,6 +250,8 @@ export default {
   mounted: function() {
     this.get_subscription();
     this.get_plan_list();
+    console.log('env variable')
+    console.log(process.env.VUE_APP_PAYPAL_CLIENT_ID);
   },
   methods: {
     get_plan_list: function(){
@@ -292,7 +294,7 @@ export default {
     display_paypal_button: function(){
       const script = document.createElement("script");
       script.src =
-          "https://www.paypal.com/sdk/js?client-id=AUSiJLQmGll3v4N9PtZJZ_JXnyvo15n9qOzBmMEdsKBR_y7dKMY9wFSq8CdqVVpdaWTfHMHKqJztM-CJ&vault=true";
+          "https://www.paypal.com/sdk/js?client-id="+process.env.VUE_APP_PAYPAL_CLIENT_ID+"&vault=true";
       script.addEventListener("load", this.setLoaded);
       document.body.appendChild(script);
     },
