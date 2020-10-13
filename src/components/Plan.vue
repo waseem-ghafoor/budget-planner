@@ -31,7 +31,7 @@
                 </h4>
                 <div v-if="is_free_plan_subscribed">
                   <button
-                    id="free_plan"
+                    id="free"
                     v-on:click="plan_subscribe"
                     class="btn btn-primary theme-btn-primary"
                   >
@@ -90,7 +90,7 @@
                 </h4>
                 <div v-if="is_plus_plan_subscribed">
                   <button
-                    id="plus_plan"
+                    id="plus"
                     v-on:click="plan_subscribe"
                     class="btn btn-primary theme-btn-primary"
                   >
@@ -155,7 +155,7 @@
                 </h4>
                 <div v-if="is_prime_plan_subscribed">
                   <button
-                    id="prime_plan"
+                    id="prime"
                     v-on:click="plan_subscribe"
                     class="btn btn-primary theme-btn-primary"
                   >
@@ -230,27 +230,23 @@ export default {
           plus_plan: [],
           prime_plan: []
         },
-      subscription: {
-          subscription_id: null,
-          plan_name: null
-      }
+      subscription: {}
     }
   },
   computed: {
     is_plus_plan_subscribed: function(){
-      return (this.subscription.plan_name != 'plus_plan')
+      return (this.subscription.plan != 'plus')
     },
     is_prime_plan_subscribed: function(){
-      return (this.subscription.plan_name != 'prime_plan')
+      return (this.subscription.plan != 'prime')
     },
     is_free_plan_subscribed: function(){
-      return (this.subscription.plan_name != 'free_plan')
+      return (this.subscription.plan != 'free')
     }
   },
   mounted: function() {
-    this.get_subscription();
     this.get_plan_list();
-    console.log('env variable')
+    this.get_subscription();
     console.log(process.env.VUE_APP_PAYPAL_CLIENT_ID);
   },
   methods: {
@@ -267,10 +263,10 @@ export default {
       });
     },
     get_subscription: function(){
-      this.$http.get('users/subscription')
+      this.$http.get('users/' + localStorage.getItem('user') + '/subscription')
       .then(response => {
-        this.subscription = response.data;
-        console.log("check");
+        this.subscription = response.data
+        console.log("subscription load check")
         console.log(this.subscription);
       })
       .catch(error => {
@@ -280,21 +276,29 @@ export default {
     },
     plan_subscribe: function(e){
       this.selected_plan = e.target.id;
-      if (this.selected_plan !== 'free_plan' && (this.subscription.subscription_id === undefined || this.subscription.subscription_id === null)){
+      console.log("check plan subscription 1");
+      console.log(this.selected_plan);
+      console.log(this.subscription.paypal_subscription_id);
+      if (this.selected_plan !== 'free' && (this.subscription.paypal_subscription_id === undefined || this.subscription.paypal_subscription_id === null)){
+        console.log("check plan subscription 3");
         this.display_paypal_button();
       }
       else{
         //this.subscription.subscription_id = '123-subsc';
-        this.subscription.plan_name = this.selected_plan;
+        console.log("check plan subscription 2");
+        console.log(e.target.id)
+        console.log(this.selected_plan);
+        this.subscription.plan = this.selected_plan;
         this.update_subscription();
+        console.log("check plan subscription");
       }
-      console.log(this.subscription.subscription_id);
+      console.log(this.subscription.paypal_subscription_id);
       e.preventDefault();
     },
     display_paypal_button: function(){
       const script = document.createElement("script");
       script.src =
-          "https://www.paypal.com/sdk/js?client-id="+process.env.VUE_APP_PAYPAL_CLIENT_ID+"&vault=true";
+      process.env.VUE_APP_PAYPAL_BASE_URL+"/sdk/js?client-id="+process.env.VUE_APP_PAYPAL_CLIENT_ID+"&vault=true";
       script.addEventListener("load", this.setLoaded);
       document.body.appendChild(script);
     },
@@ -316,7 +320,7 @@ export default {
           onApprove: (data, actions) => {
               console.log("======check=======");
               this.subscription.plan_name = this.selected_plan;
-              this.subscription.subscription_id = data.subscriptionID
+              this.subscription.paypal_subscription_id = data.subscriptionID
               this.update_subscription();
           },
           onError: err => {
@@ -326,24 +330,25 @@ export default {
         }).render(this.$refs.paypal);
     },
     update_subscription: function(){
-      this.$http.put('users/subscription', {
-        paypal_subscription_id: this.subscription.subscription_id,
-        plan_name: this.subscription.plan_name
-        })
+      this.$http.put('users/' + localStorage.getItem('user') + '/user_access', 
+      { 
+        paypal_subscription_id: this.subscription.paypal_subscription_id,
+        plan_name: this.selected_plan
+      })
         .then(response => {
-            console.log(response.data);
+           var data = response.data;
         })
         .catch(error => {
-        // TODO: Refactor this with a feature.
-        //this.$parent.$parent.toast(error);
-        }
-      );
+          this.$parent.$parent.toast(error);
+        });
     },
     get_selected_plan_id: function() {
-        if (this.selected_plan == 'plus_plan'){
+        if (this.selected_plan == 'plus'){
+          console.log("plus plan");
+          console.log(this.plan_lists.plus_plan['paypal_plan_id'])
           return this.plan_lists.plus_plan['paypal_plan_id'];
         }
-        else if(this.selected_plan == 'prime_plan'){
+        else if(this.selected_plan == 'prime'){
           return this.plan_lists.prime_plan['paypal_plan_id'];
         }
       }
