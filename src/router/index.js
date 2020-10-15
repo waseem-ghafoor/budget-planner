@@ -24,6 +24,7 @@ import Quiz from '@/components/Quiz.vue'
 Vue.use(VueRouter)
 
 let router = new VueRouter({
+  mode: 'history',  
   routes: [
     { path: '/',            name: "home",        component: Home,        meta: { guest: true } },
     { path: "/login",       name: "login",       component: Login,       meta: { guest: true, title: 'Login' } },
