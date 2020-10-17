@@ -61,6 +61,9 @@
                   <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li>
+                      <router-link class="nav-link" :to="{ name: 'user-setting' }">User Setting</router-link>
+                    </li>
+                    <li>
                       <router-link class="nav-link" :to="{ name: 'feedback' }">Feedback</router-link>
                     </li>
                     <li>
@@ -168,6 +171,8 @@ export default {
         finalContent = error.response.data;
       } else if (error.response.status == 500) {
         finalContent = "Some error occured"
+      }else if (error.response.status == 403) {
+        finalContent = error.response.data.message
       }
 
       this.$bvToast.toast(finalContent, {
