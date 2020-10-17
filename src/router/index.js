@@ -10,6 +10,7 @@ import Dashboard from '@/components/Dashboard.vue'
 import Plan from '@/components/Plan.vue'
 import Summary from '@/components/Summary.vue'
 import Setting from '@/components/Setting.vue'
+import UserSetting from '@/components/UserSetting.vue'
 import ForgotPassword from '@/components/ForgotPassword.vue'
 import ResetPassword from '@/components/ResetPassword.vue'
 import RegistrationComplete from '@/components/RegistrationComplete.vue'
@@ -35,6 +36,7 @@ let router = new VueRouter({
     { path: "/terms",       name: "terms",       component: Terms,       meta: { guest: true, title: 'Terms and Condition' } },
 
     { path: "/summary",     name: "summary",     component: Summary,     meta: { requiresAuth: true, title: 'Summary' } },
+    { path: "/user-setting",     name: "user-setting",     component: UserSetting,     meta: { requiresAuth: true, title: 'Update Account Access' } },
     { path: "/dashboard",   name: "dashboard",   component: Dashboard,   meta: { requiresAuth: true, title: 'Dashboard' } },
     { path: "/plan",        name: "plan",        component: Plan,        meta: { requiresAuth: true, title: 'Plan' } },    
     { path: "/setting",     name: "setting",     component: Setting,     meta: { requiresAuth: true, title: 'Setting' } },
