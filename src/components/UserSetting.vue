@@ -77,7 +77,7 @@ export default {
         })
         .then(response => {
           this.$parent.toast("Settings have been updated successfully");
-          //location.reload();
+          location.reload();
         })
         .catch(error => {
           this.$parent.toast(error);
